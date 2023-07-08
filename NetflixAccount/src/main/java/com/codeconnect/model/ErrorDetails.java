@@ -1,6 +1,7 @@
 package com.codeconnect.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class ErrorDetails {
 	
@@ -8,7 +9,7 @@ public class ErrorDetails {
 	private String message;
 	private String details;
 	public ErrorDetails() {
-		super();
+		
 	}
 	
 	public ErrorDetails(LocalDate ld, String message, String details) {
@@ -16,6 +17,12 @@ public class ErrorDetails {
 		this.ld = ld;
 		this.message = message;
 		this.details = details;
+	}
+
+	
+
+	public ErrorDetails(Date date, String string, String string2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public LocalDate getLd() {

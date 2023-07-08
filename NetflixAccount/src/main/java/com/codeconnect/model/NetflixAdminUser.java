@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 @Entity
 @Table(name="netflixadminuser")
 public class NetflixAdminUser {
@@ -17,9 +19,9 @@ public class NetflixAdminUser {
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer uid;
-	
+	@Size(min=2,message = "name should have atleast 2 charecters")
 	private String uname;
-	
+	@Past
 	private LocalDate dop;
 
 	public NetflixAdminUser() {
