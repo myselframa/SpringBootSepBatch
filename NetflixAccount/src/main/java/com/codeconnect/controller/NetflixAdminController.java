@@ -1,10 +1,14 @@
 package com.codeconnect.controller;
 
-import java.awt.print.Book;
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.LinkRelation;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +28,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
+ 
 
 @RestController
 public class NetflixAdminController {
@@ -48,13 +53,17 @@ public class NetflixAdminController {
 	  @ApiResponse(responseCode = "404", description = "User not found", 
 	    content = @Content) })
 	@GetMapping("/user/{id}")
-	public NetflixAdminUser findUser(@PathVariable Integer id) {
+	public EntityModel<NetflixAdminUser> findUser(@PathVariable Integer id) {
 		
 		NetflixAdminUser user = netflixAdminService.findUser(id);
 		if(user == null) {
 			throw new UserNotFoundException("id  :"+id);
 		}
-		return user;
+		EntityModel<NetflixAdminUser> entityModel=EntityModel.of(user);
+		WebMvcLinkBuilder link=linkTo(methodOn(this.getClass()).getallUsers());
+		
+		entityModel.add(link.withRel("getAllUser"));
+		return entityModel;
 	}
 	
 	@PostMapping("/new")
