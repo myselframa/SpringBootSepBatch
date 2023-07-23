@@ -20,7 +20,7 @@ public class SpringBootSecurityConfig {
 	SecurityFilterChain customFIlterchain(HttpSecurity http) throws Exception{
 		
 		http.authorizeHttpRequests((requests)->requests
-		.requestMatchers("/cards","/loans","/balance","/account").authenticated()
+		.requestMatchers("/cards","/loans","/balance","/account").hasRole("")
 		.requestMatchers("/contact","/notice").permitAll())
 		.formLogin(Customizer.withDefaults())
 		.httpBasic(Customizer.withDefaults());

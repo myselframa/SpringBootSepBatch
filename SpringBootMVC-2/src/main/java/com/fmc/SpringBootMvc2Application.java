@@ -2,13 +2,12 @@ package com.fmc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class SpringSecurityApplication {
+public class SpringBootMvc2Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringSecurityApplication.class, args);
+		SpringApplication.run(SpringBootMvc2Application.class, args);
 	}
 
 }
